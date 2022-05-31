@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.80">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Satchmo Ramble</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+
+  <script src="satchmo_report_files/libs/clipboard/clipboard.min.js"></script>
+  <script src="satchmo_report_files/libs/quarto-html/quarto.js"></script>
+  <script src="satchmo_report_files/libs/quarto-html/popper.min.js"></script>
+  <script src="satchmo_report_files/libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="satchmo_report_files/libs/quarto-html/anchor.min.js"></script>
+  <link href="satchmo_report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="satchmo_report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="satchmo_report_files/libs/bootstrap/bootstrap.min.js"></script>
+  <link href="satchmo_report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="satchmo_report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="satchmo_report_files\libs/tabwid-1.0.0/tabwid.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="fullcontent">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+
+<div class="quarto-title"><h1 class="title display-7">Satchmo Ramble</h1></div></header>
+<div class="cell">
+
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Bernd Hoffman asked me to say something on Louis Armstrong in my talk the Radio Jazz Research Group meeting in Graz (June 10, 2022). I decided to follow suit and to see what can be said about Louis Armstrong withe method of corpus analysis and computational musicology, based on the Weimar Jazz Database. This will also serve as a showcase for new <code>parkR</code> package that I am currently developing, and that gathers data and methods around the Weimar Jazz Database (as well as a generative algorithm for jazz soli), and, most importantly, it contains raw and derived datasets.</p>
+<p>The Weimar Jazz Database contains only 8 solos by Louis Armstrong, which is hardly to be called a corpus, but it is sure more than a single solo. The solos span a time period from 1925 to 1928, so they represent the years of initial success of Satchmo.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-a882b508{}.cl-a8783574{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a87881c8{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a87881c9{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a878aa5e{width:103.7pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa5f{width:79.3pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa60{width:86.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa61{width:97pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa62{width:55.4pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa63{width:137.3pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa64{width:256.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa65{width:256.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa66{width:55.4pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa67{width:137.3pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878aa68{width:103.7pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d150{width:97pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d151{width:79.3pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d152{width:86.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d153{width:55.4pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d154{width:137.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d155{width:256.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d156{width:97pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d157{width:86.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d158{width:79.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d159{width:103.7pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878d15a{width:86.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f842{width:79.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f843{width:256.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f844{width:103.7pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f845{width:97pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f846{width:55.4pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a878f847{width:137.3pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-a882b508">
+<caption class="Table Caption">
+<p>Solos by Louis Armstrong in the Weimar Jazz Database</p>
+</caption>
+<thead><tr style="overflow-wrap:break-word;"><td class="cl-a878f847"><p class="cl-a87881c8"><span class="cl-a8783574">Title</span></p></td><td class="cl-a878f842"><p class="cl-a87881c8"><span class="cl-a8783574">Solo Time</span></p></td><td class="cl-a878f844"><p class="cl-a87881c9"><span class="cl-a8783574">Number of Notes</span></p></td><td class="cl-a878d15a"><p class="cl-a87881c9"><span class="cl-a8783574">Tempo (bpm)</span></p></td><td class="cl-a878f846"><p class="cl-a87881c8"><span class="cl-a8783574">Key</span></p></td><td class="cl-a878f843"><p class="cl-a87881c8"><span class="cl-a8783574">Record Bib</span></p></td><td class="cl-a878f845"><p class="cl-a87881c8"><span class="cl-a8783574">Recording Year</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a878aa63"><p class="cl-a87881c8"><span class="cl-a8783574">Gut Bucket Blues</span></p></td><td class="cl-a878aa5f"><p class="cl-a87881c8"><span class="cl-a8783574">01:55-02:15</span></p></td><td class="cl-a878aa5e"><p class="cl-a87881c9"><span class="cl-a8783574">48</span></p></td><td class="cl-a878aa60"><p class="cl-a87881c9"><span class="cl-a8783574">146.0</span></p></td><td class="cl-a878aa62"><p class="cl-a87881c8"><span class="cl-a8783574">C-maj</span></p></td><td class="cl-a878aa64"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878aa61"><p class="cl-a87881c8"><span class="cl-a8783574">1925</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa63"><p class="cl-a87881c8"><span class="cl-a8783574">Big Butter and Egg Man</span></p></td><td class="cl-a878aa5f"><p class="cl-a87881c8"><span class="cl-a8783574">01:57-02:37</span></p></td><td class="cl-a878aa5e"><p class="cl-a87881c9"><span class="cl-a8783574">173</span></p></td><td class="cl-a878aa60"><p class="cl-a87881c9"><span class="cl-a8783574">196.7</span></p></td><td class="cl-a878aa62"><p class="cl-a87881c8"><span class="cl-a8783574">G-maj</span></p></td><td class="cl-a878aa64"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878aa61"><p class="cl-a87881c8"><span class="cl-a8783574">1926</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa63"><p class="cl-a87881c8"><span class="cl-a8783574">Cornet Chop Suey</span></p></td><td class="cl-a878aa5f"><p class="cl-a87881c8"><span class="cl-a8783574">01:41-02:01</span></p></td><td class="cl-a878aa5e"><p class="cl-a87881c9"><span class="cl-a8783574">92</span></p></td><td class="cl-a878aa60"><p class="cl-a87881c9"><span class="cl-a8783574">192.2</span></p></td><td class="cl-a878aa62"><p class="cl-a87881c8"><span class="cl-a8783574">F-maj</span></p></td><td class="cl-a878aa64"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878aa61"><p class="cl-a87881c8"><span class="cl-a8783574">1926</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa67"><p class="cl-a87881c8"><span class="cl-a8783574">Muskrat Ramble</span></p></td><td class="cl-a878d151"><p class="cl-a87881c8"><span class="cl-a8783574">01:01-01:23</span></p></td><td class="cl-a878aa68"><p class="cl-a87881c9"><span class="cl-a8783574">81</span></p></td><td class="cl-a878d152"><p class="cl-a87881c9"><span class="cl-a8783574">183.7</span></p></td><td class="cl-a878aa66"><p class="cl-a87881c8"><span class="cl-a8783574">Ab-maj</span></p></td><td class="cl-a878aa65"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878d150"><p class="cl-a87881c8"><span class="cl-a8783574">1926</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa67"><p class="cl-a87881c8"><span class="cl-a8783574">Got No Blues</span></p></td><td class="cl-a878d151"><p class="cl-a87881c8"><span class="cl-a8783574">01:03-02:00</span></p></td><td class="cl-a878aa68"><p class="cl-a87881c9"><span class="cl-a8783574">192</span></p></td><td class="cl-a878d152"><p class="cl-a87881c9"><span class="cl-a8783574">142.8</span></p></td><td class="cl-a878aa66"><p class="cl-a87881c8"><span class="cl-a8783574">F-maj</span></p></td><td class="cl-a878aa65"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878d150"><p class="cl-a87881c8"><span class="cl-a8783574">1927</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa67"><p class="cl-a87881c8"><span class="cl-a8783574">Once in a While</span></p></td><td class="cl-a878d151"><p class="cl-a87881c8"><span class="cl-a8783574">02:34-03:12</span></p></td><td class="cl-a878aa68"><p class="cl-a87881c9"><span class="cl-a8783574">193</span></p></td><td class="cl-a878d152"><p class="cl-a87881c9"><span class="cl-a8783574">197.7</span></p></td><td class="cl-a878aa66"><p class="cl-a87881c8"><span class="cl-a8783574">F-maj</span></p></td><td class="cl-a878aa65"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878d150"><p class="cl-a87881c8"><span class="cl-a8783574">1927</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878aa63"><p class="cl-a87881c8"><span class="cl-a8783574">Savoy Blues</span></p></td><td class="cl-a878aa5f"><p class="cl-a87881c8"><span class="cl-a8783574">01:28-02:14</span></p></td><td class="cl-a878aa5e"><p class="cl-a87881c9"><span class="cl-a8783574">159</span></p></td><td class="cl-a878aa60"><p class="cl-a87881c9"><span class="cl-a8783574">129.3</span></p></td><td class="cl-a878aa62"><p class="cl-a87881c8"><span class="cl-a8783574">G-maj</span></p></td><td class="cl-a878aa64"><p class="cl-a87881c8"><span class="cl-a8783574">Pendragon Press, New York 978-1-57647-120-3</span></p></td><td class="cl-a878aa61"><p class="cl-a87881c8"><span class="cl-a8783574">1927</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a878d154"><p class="cl-a87881c8"><span class="cl-a8783574">Basin Street Blues</span></p></td><td class="cl-a878d158"><p class="cl-a87881c8"><span class="cl-a8783574">02:02-03:08</span></p></td><td class="cl-a878d159"><p class="cl-a87881c9"><span class="cl-a8783574">219</span></p></td><td class="cl-a878d157"><p class="cl-a87881c9"><span class="cl-a8783574">107.2</span></p></td><td class="cl-a878d153"><p class="cl-a87881c8"><span class="cl-a8783574">Bb-maj</span></p></td><td class="cl-a878d155"><p class="cl-a87881c8"><span class="cl-a8783574">Giants of Jazz CD53001</span></p></td><td class="cl-a878d156"><p class="cl-a87881c8"><span class="cl-a8783574">1928</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Semitone interval distribution across all Armstrong’s solos</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Semitone interval distribution for all solos</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Fuzzy interval distribution for all Armstrongs’s solos</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Extended chord pitch class distributions of all Armstongs’s solos</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The extended chordal diatonic pitch classes employed by Armstrong show a clear rooting in major pentatonics and the blues. This is particularly evident when one compares the distribution of CDPCXs by Armstrong with the rest of WJD. The classes with the strongest emphasis form a major sixth chord (1, 3, 5, 6). Generally, the sixth is more important then seventh, which reflects a general shift from the sixth to the seventh chords in historical development from traditional to modern jazz (cf.&nbsp;Frieler 2017). Very striking is Armstrong’s avoidance of the fourth scale step, only chromatic extensions are used less often by Armstrong. In relation to the rest of the WJD, there is also a preference for blue thirds (#9), i.e.&nbsp;minor thirds over major chords. Together with the prevalence of the major pentatonic scale, this clearly shows the deep blues roots of Satchmo’s playing style. Finally, this also related to the overall harmonic vocabulary, as sevenths chords were not in wide used at that time, except for dominant seventh chords. In fact, major and dominant seventh chords make about 90% of all chords in the background of Armstrong’s solos in the WJD .</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Comparisonm of extended chordal pitch class frequencies</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the fuzzy intervals (or refined contour), we find clear differences between Armstrong’s solos and the rest of solos in the WJD. Satchmo has a much stronger preference for note repetitions (13% vs.&nbsp;5%) and larger intervals, notably Jumps (15% vs- 105) and Large Jumps (7% vs.&nbsp;3%), i.e., intervals larger than a major third. Armstrongs’s solos are much less “linear” than modern jazz solos, which make the majority in the WJD. Only 36% of his intervals are steps, compated to 55% in the WJD. This indicates a focus on chordal play, it also explains a certain “ragged” impression of his solos, which flow lessly smoothly than in later styles. Interestingly, however, in regard the ascending and descending minor and major thirds, Armstrong in completely in line with the WJD distribution.</p>
+<div class="cell" data-fig.caption="Chisquare residuals for fuzzy intervals in comparison of Satchmo and the rest of the WJD. (Repetition = unisones, Step = minor and major seconds, Leap = minor and major thirds, Jums = fourths, tritones, and fifths, Large Jump = intervals larger than a fifth.)">
+<div class="cell-output-display">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Comparisonm of absolute duration class frequencies</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">z-Plots of of Louis Armstrongs solos on assorted set of core features</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">z-Plots of of Louis Armstrongs solos on assorted set of core features</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="satchmo_report_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-af0ee2b6{}.cl-af054c56{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-af057348{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-af059a3a{width:45.6pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a3b{width:51.7pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a3c{width:50.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a3d{width:63.9pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a3e{width:53.5pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a3f{width:45.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a40{width:50.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a41{width:51.7pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a42{width:63.9pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a43{width:53.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af059a44{width:45.6pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af05c140{width:51.7pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af05c141{width:63.9pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af05c142{width:50.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-af05c143{width:53.5pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-af0ee2b6">
+<caption class="Table Caption">
+<p>Distribution of tone modulation in Armstrongs’s solso and in the Weimar Jazz Database</p>
+</caption>
+<thead><tr style="overflow-wrap:break-word;"><td class="cl-af05c141"><p class="cl-af057348"><span class="cl-af054c56">is_la</span></p></td><td class="cl-af05c140"><p class="cl-af057348"><span class="cl-af054c56">none</span></p></td><td class="cl-af05c143"><p class="cl-af057348"><span class="cl-af054c56">vibrato</span></p></td><td class="cl-af059a44"><p class="cl-af057348"><span class="cl-af054c56">slide</span></p></td><td class="cl-af059a44"><p class="cl-af057348"><span class="cl-af054c56">bend</span></p></td><td class="cl-af05c142"><p class="cl-af057348"><span class="cl-af054c56">fall-off</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-af059a3d"><p class="cl-af057348"><span class="cl-af054c56">WJD</span></p></td><td class="cl-af059a3b"><p class="cl-af057348"><span class="cl-af054c56">95.8%</span></p></td><td class="cl-af059a3e"><p class="cl-af057348"><span class="cl-af054c56">2.0%</span></p></td><td class="cl-af059a3a"><p class="cl-af057348"><span class="cl-af054c56">1.6%</span></p></td><td class="cl-af059a3a"><p class="cl-af057348"><span class="cl-af054c56">0.3%</span></p></td><td class="cl-af059a3c"><p class="cl-af057348"><span class="cl-af054c56">0.3%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-af059a42"><p class="cl-af057348"><span class="cl-af054c56">Satchmo</span></p></td><td class="cl-af059a41"><p class="cl-af057348"><span class="cl-af054c56">88.2%</span></p></td><td class="cl-af059a43"><p class="cl-af057348"><span class="cl-af054c56">8.6%</span></p></td><td class="cl-af059a3f"><p class="cl-af057348"><span class="cl-af054c56">1.6%</span></p></td><td class="cl-af059a3f"><p class="cl-af057348"><span class="cl-af054c56">1.6%</span></p></td><td class="cl-af059a40"><p class="cl-af057348"><span class="cl-af054c56">0.2%</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+</main>
+<!-- /main column -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+</body></html>

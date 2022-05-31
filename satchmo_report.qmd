@@ -1,0 +1,155 @@
+---
+title: "Satchmo Ramble"
+format: html
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+library(parkR)
+library(jazzodata)
+library(flextable)
+source("analysis.R")
+knitr::opts_chunk$set("ft.shadow" = FALSE, echo = FALSE, warning = FALSE, message = FALSE)
+la_meta <-  wjd_meta %>% filter(performer == "Louis Armstrong")
+la_transforms <- wjd_transforms %>% 
+  filter(str_detect(id, "Armstrong")) %>% 
+  left_join(la_meta %>% select(title, id, recordingyear), by = "id")
+```
+
+## Introduction
+
+Bernd Hoffman asked me to say something on Louis Armstrong in my talk the Radio Jazz Research Group meeting in Graz (June 10, 2022). I decided to follow suit and to see what can be said about Louis Armstrong withe method of corpus analysis and computational musicology, based on the Weimar Jazz Database. This will also serve as a showcase for new `parkR` package that I am currently developing, and that gathers data and methods around the Weimar Jazz Database (as well as a generative algorithm for jazz soli), and, most importantly, it contains raw and derived datasets.
+
+The Weimar Jazz Database contains only `r nrow(jazzodata::wjd_meta %>% filter(performer == "Louis Armstrong"))` solos by Louis Armstrong, which is hardly to be called a corpus, but it is sure more than a single solo. The solos span a time period from `r min(la_meta$recordingyear)` to `r max(la_meta$recordingyear)`, so they represent the years of initial success of Satchmo.
+
+```{r}
+#| echo: false
+#| tbl-cap: "Overview of solos by Louis Armstrong in the Weimar Jazz Database"
+tmp <- la_meta %>% 
+  mutate(recordbib = sprintf("%s %s", label, recordbib) ) %>% 
+  arrange(recordingyear) %>% 
+  select(title, solo_time, number_notes, avgtempo, key, recordbib, recordingyear) %>% 
+  mutate(recordingyear = as.character(recordingyear)) %>% 
+  set_names(c("Title", "Solo Time", "Number of Notes", "Tempo (bpm)", "Key",  "Record Bib", "Recording Year"))
+flextable::flextable(tmp) %>% 
+  flextable::set_caption("Solos by Louis Armstrong in the Weimar Jazz Database") %>% 
+  flextable::autofit()
+#knitr::kable(tmp)
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Semitone interval distribution across all Armstrong's solos"
+parkR::int_hist(la_transforms %>% mutate(repetition = int_raw == 0), fill_var = "repetition")
+
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Semitone interval distribution for all solos"
+parkR::int_hist(la_transforms %>% mutate(repetition = int_raw == 0), cut_off = 15, fill_var = "repetition") + facet_wrap(~title)
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Fuzzy interval distribution for all Armstrongs's solos"
+parkR::fuzzyint_hist(la_transforms %>% mutate(repetition = fuzzyint_raw == 0), fill_var = "repetition") + facet_wrap(~title)
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Fuzzy interval distribution across all solos"
+#| include: false
+parkR::fuzzyint_hist(wjd_transforms %>% mutate(repetition = fuzzyint_raw == 0), fill_var = "repetition") 
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Extended chord pitch class distribution across all Armstongs's solos"
+#| include: false
+parkR::cdpcx_hist(la_transforms %>% filter(!is.na(cdpcx_raw)), cdpcx_col = "cdpcx_raw")  
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Extended chord pitch class distribution across the WJD"
+#| include: false
+parkR::cdpcx_hist(wjd_transforms %>% filter(!is.na(cdpcx_raw)), cdpcx_col = "cdpcx_raw") 
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Extended chord pitch class distributions of all Armstongs's solos"
+parkR::cdpcx_hist(la_transforms %>% filter(!is.na(cdpcx_raw)), cdpcx_col = "cdpcx_raw")  + facet_wrap(~title)
+```
+
+The extended chordal diatonic pitch classes employed by Armstrong show a clear rooting in major pentatonics and the blues. This is particularly evident when one compares the distribution of CDPCXs by Armstrong with the rest of WJD. The classes with the strongest emphasis form a major sixth chord (1, 3, 5, 6). Generally, the sixth is more important then seventh, which reflects a general shift from the sixth to the seventh chords in historical development from traditional to modern jazz (cf. Frieler 2017). Very striking is Armstrong's avoidance of the fourth scale step, only chromatic extensions are used less often by Armstrong. In relation to the rest of the WJD, there is also a preference for blue thirds (#9), i.e. minor thirds over major chords. Together with the prevalence of the major pentatonic scale, this clearly shows the deep blues roots of Satchmo's playing style. Finally, this also related to the overall harmonic vocabulary, as sevenths chords were not in wide used at that time, except for dominant seventh chords. In fact, major and dominant seventh chords make about 90% of all chords in the background of Armstrong's solos in the WJD .
+
+```{r}
+#| fig-cap: "Comparisonm of extended chordal pitch class frequencies "
+cmp <- cmp_groups(wjd_transforms %>% filter(!is.na(cdpcx_raw) & nchar(cdpcx_raw) >0) %>%  mutate(is_la = str_detect(id, "Armstrong"), cdpcx_raw = nice_cdpcx(cdpcx_raw)), "cdpcx_raw", "is_la", group_labels = c("WJD", "Satchmo"), fill_colors = parkR:::jazzomat_palette$set1[1:2], subtitle = "Extended diatonic chordal pitch classes")
+cmp$plot
+
+```
+
+```{r}
+#| include: false
+cmp <- cmp_groups(wjd_transforms %>% filter(!is.na(cpc_raw) & nchar(cpc_raw) > 0) %>%  mutate(is_la = str_detect(id, "Armstrong")), "cpc_raw", "is_la", group_labels = c("WJD", "Satchmo"), fill_colors = parkR:::jazzomat_palette$set1[1:2], subtitle = "Chordal pitch classes")
+cmp$plot
+
+```
+
+Looking at the fuzzy intervals (or refined contour), we find clear differences between Armstrong's solos and the rest of solos in the WJD. Satchmo has a much stronger preference for note repetitions (13% vs. 5%) and larger intervals, notably Jumps (15% vs- 105) and Large Jumps (7% vs. 3%), i.e., intervals larger than a major third. Armstrongs's solos are much less "linear" than modern jazz solos, which make the majority in the WJD. Only 36% of his intervals are steps, compated to 55% in the WJD. This indicates a focus on chordal play, it also explains a certain "ragged" impression of his solos, which flow lessly smoothly than in later styles. Interestingly, however, in regard the ascending and descending minor and major thirds, Armstrong in completely in line with the WJD distribution.
+
+```{r fig.caption = "Chisquare residuals for fuzzy intervals in comparison of Satchmo and the rest of the WJD. (Repetition = unisones, Step = minor and major seconds, Leap = minor and major thirds, Jums = fourths, tritones, and fifths, Large Jump = intervals larger than a fifth.)"}
+cmp <- cmp_groups(wjd_transforms %>% mutate(is_la = str_detect(id, "Armstrong"), fuzzyint_raw = factor(fuzzyint_raw, labels = labels$fuzzy_labels)), "fuzzyint_raw", "is_la", group_labels = c("WJD", "Satchmo"), fill_colors = parkR:::jazzomat_palette$set1[1:2], subtitle = "Fuzzy intervals")
+cmp$plot
+
+```
+
+```{r}
+#| fig-cap: "Comparisonm of absolute duration class frequencies"
+cmp <- cmp_groups(wjd_transforms %>% mutate(is_la = str_detect(id, "Armstrong")) %>% mutate(ioiclass_abs_raw = factor(ioiclass_abs_raw, labels = parkR::labels$durclass_labels )), "ioiclass_abs_raw", "is_la", group_labels = c("WJD", "Satchmo"), fill_colors = parkR:::jazzomat_palette$set1[1:2], subtitle = "Abs. IOI classes")
+cmp$plot
+```
+
+```{r}
+#| fig-cap: "z-Plots of of Louis Armstrongs solos on assorted set of core features"
+parkR::wjd_subgroup_z_plot(feature_frame = jazzodata::wjd_features_hardcore %>% mutate(is_la = str_detect(id, "Armstrong")), 
+                           group_selector = "is_la", 
+                           facet_var = "full_title", 
+                           features = jazzodata::hardcore_features, 
+                           # features = jazzodata::hardcore_features[str_detect(jazzodata::hardcore_features, "^cdpcx")], 
+                           base_size = 10, 
+                           sort_by_value = T)
+```
+
+
+```{r}
+#| fig-cap: "z-Plots of of Louis Armstrongs solos on assorted set of core features"
+parkR::wjd_subgroup_z_plot(feature_frame = jazzodata::wjd_features_hardcore %>% mutate(`Charlie Parker` = str_detect(id, "CharlieParker")), 
+                           group_selector = "Charlie Parker", 
+                           facet_var = "full_title", 
+                           features = jazzodata::hardcore_features, 
+                           # features = jazzodata::hardcore_features[str_detect(jazzodata::hardcore_features, "^cdpcx")], 
+                           base_size = 10, 
+                           sort_by_value = T)
+```
+
+
+```{r}
+wjd_tone %>% mutate(is_la = factor(str_detect(id, "Armstrong"), labels = c("WJD", "Satchmo")), modulation = fct_infreq(case_when(nzchar(modulation) ~ modulation, T ~"non"))) %>% with(., table(is_la, modulation)) %>% ggassoc2(layout = "horizontal", subtitle = "Tone Modulations")
+```
+
+```{r}
+to_percent <- function(x, digits = 1) round(100 * x, 1)
+mod_tab <- wjd_tone %>% mutate(is_la = factor(str_detect(id, "Armstrong"), labels = c("WJD", "Satchmo")), modulation = fct_infreq(case_when(nzchar(modulation) ~ modulation, T ~"none"))) %>% with(., table(is_la, modulation)) %>% prop.table(1) %>% to_percent() %>% as.data.frame() %>% pivot_wider(id_cols = is_la, names_from = modulation, values_from = Freq) %>% mutate(across(where(is.numeric), function(.x) sprintf("%.1f%%", .x)))
+flextable::flextable(mod_tab) %>% 
+  flextable::set_caption("Distribution of tone modulation in Armstrongs's solso and in the Weimar Jazz Database") %>% 
+  flextable::autofit()
+
+```
